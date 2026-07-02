@@ -812,6 +812,31 @@ const STAGES = [
     theme:{ sky:['#15283a','#1d3146','#0a1622'], bg:'rgba(30,55,70,0.6)',
             mainFill:'#34506a', mainTop:'#5a7e9a', centerFill:'#34506a', centerTop:'#5a7e9a',
             wallFill:'#2b4258', wallEdge:'#6c93b4' } },
+  { name:'バトルフィールド',
+    main:{ x1:180, x2:1100, y:560 }, center:{ x1:565, x2:715, y:325 },   // 頂上の台＋左右の浮島（三足場）
+    plats:[ { x1:300, x2:470, y:445 }, { x1:810, x2:980, y:445 } ],
+    blastL:-180, blastR:1460, blastTop:-360, blastBottom:1000,
+    theme:{ sky:['#2a2440','#221c38','#0e0a1c'], bg:'rgba(40,30,70,0.55)',
+            mainFill:'#463a6a', mainTop:'#7a68b0', centerFill:'#3f3560', centerTop:'#8f7cc8' } },
+  { name:'大平原',
+    main:{ x1:110, x2:1170, y:520 },   // 足場が一枚だけの広い平地（腕試し向け）
+    blastL:-240, blastR:1520, blastTop:-360, blastBottom:1000,
+    theme:{ sky:['#f7b76b','#f2895f','#7a3b52'], bg:'rgba(120,60,70,0.45)',
+            mainFill:'#6a4a3a', mainTop:'#d99a5e', centerFill:'#6a4a3a', centerTop:'#d99a5e' } },
+  { name:'天空の階段',
+    main:{ x1:150, x2:900, y:585 },   // 左の地面から右へ昇る非対称の階段
+    plats:[ { x1:770, x2:950, y:470 }, { x1:930, x2:1110, y:360 }, { x1:1080, x2:1240, y:250 } ],
+    blastL:-180, blastR:1560, blastTop:-360, blastBottom:1000,
+    theme:{ sky:['#8fd3ff','#bfe3f5','#f6d9ea'], bg:'rgba(120,150,190,0.4)',
+            mainFill:'#5c7fa8', mainTop:'#8fb4d8', centerFill:'#6a8fb8', centerTop:'#a6cbe8' } },
+  { name:'峡谷の砦',
+    main:{ x1:290, x2:990, y:430 }, center:{ x1:580, x2:700, y:250 },   // 両サイドに壁（壁キック）＋高低差の多い立体構成
+    plats:[ { x1:350, x2:510, y:335 }, { x1:770, x2:930, y:335 } ],
+    walls:[ { x:290, top:430, bottom:706 }, { x:990, top:430, bottom:706 } ],
+    blastL:-180, blastR:1460, blastTop:-360, blastBottom:1000,
+    theme:{ sky:['#10201c','#16302a','#07120f'], bg:'rgba(20,60,50,0.6)',
+            mainFill:'#264a40', mainTop:'#4c8a76', centerFill:'#264a40', centerTop:'#4c8a76',
+            wallFill:'#1f3d34', wallEdge:'#5fae95' } },
 ];
 const STAGE = {};        // アクティブステージ（applyStageで内容を差し替え）
 const PLATFORMS = [];    // アクティブな足場（applyStageで再構築。物理はこの参照を使う）
@@ -821,9 +846,11 @@ function applyStage(i) {
   STAGE.id = idx; STAGE.name = s.name;
   STAGE.main = s.main; STAGE.center = s.center;   // centerは無いステージもある
   STAGE.walls = s.walls || null;                  // 壁（崖）が無いステージはnull
+  STAGE.plats = s.plats || null;                  // 追加の浮遊足場（任意）
   STAGE.blastL = s.blastL; STAGE.blastR = s.blastR; STAGE.blastTop = s.blastTop; STAGE.blastBottom = s.blastBottom;
   STAGE.theme = s.theme;
   PLATFORMS.length = 0; PLATFORMS.push(STAGE.main); if (STAGE.center) PLATFORMS.push(STAGE.center);
+  if (STAGE.plats) for (const p of STAGE.plats) PLATFORMS.push(p);   // 追加足場も物理に反映
 }
 applyStage(0);           // 既定ステージ
 // 4人がなるべく離れて出現（最も狭いステージの台 x:360〜920 内に収め、場外落下を防ぐ）
@@ -4984,6 +5011,12 @@ function drawStage(ctx, stage) {
     ctx.fillStyle = th.centerFill;
     roundRect(ctx, st.center.x1, st.center.y, st.center.x2 - st.center.x1, 16, 6); ctx.fill();
     ctx.fillStyle = th.centerTop; ctx.fillRect(st.center.x1, st.center.y, st.center.x2 - st.center.x1, 4);
+  }
+  // 追加の浮遊足場（あるステージのみ）
+  if (st.plats) for (const p of st.plats) {
+    ctx.fillStyle = th.centerFill;
+    roundRect(ctx, p.x1, p.y, p.x2 - p.x1, 16, 6); ctx.fill();
+    ctx.fillStyle = th.centerTop; ctx.fillRect(p.x1, p.y, p.x2 - p.x1, 4);
   }
 }
 // HUD（設計書 13）
