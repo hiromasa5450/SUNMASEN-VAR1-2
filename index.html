@@ -670,6 +670,30 @@ const OKANE_MOVE = { name:'小判', dmg:6, kb:7, kbg:0.08, up:true };
 const TINY_SCALE = 0.42, TINY_SPEED = 2, TINY_DUR = 480, TINY_CD = 1800;   // CHISANA：極小8秒/CT30秒
 const SUN_DUR = 240, SUN_CD = 2400;                           // TAIYOU：目つぶし4秒/CT40秒
 
+// ---- 追加キャラ群2 ----
+const KAZE_PUSH = 24, KAZE_R = 460, KAZE_CD = 840;            // KAZE：風で押し流す/CT14秒
+const HOLE_DUR = 150, HOLE_CD = 1680;                         // BLACKHOLE：吸い込み拘束2.5秒/CT28秒
+const METEO_DUR = 180, METEO_CD = 1800;                       // METEO：隕石3秒/CT30秒
+const METEO_MOVE = { name:'隕石', dmg:12, kb:9, kbg:0.11, up:true };
+const THORN_DUR = 360, THORN_CD = 1500;                       // TOGE：棘6秒/CT25秒
+const KUSARI_PULL = 26, KUSARI_CD = 720;                      // KUSARI：鎖で引き寄せ/CT12秒
+const KAIFUKU_HEAL = 30, KAIFUKU_CD = 2100;                   // KAIFUKU：30%回復/CT35秒
+const CHARGE_MUL = 3, CHARGE_CD = 1500;                       // CHARGE：次の一撃3倍/CT25秒
+const PLAYDEAD_DUR = 180, PLAYDEAD_CD = 1320;                 // SHINITAI：死んだふり3秒/CT22秒
+const LIFESTEAL_DUR = 480, LIFESTEAL_CD = 1800;               // LIFESTEAL：吸収8秒/CT30秒
+const HANE_DUR = 480, HANE_CD = 1440;                         // HANE：落下半分8秒/CT24秒
+const KONRAN_DUR = 360, KONRAN_CD = 1800;                     // KONRAN：混乱6秒/CT30秒
+const SILENCE_DUR = 480, SILENCE_CD = 2100;                   // CHINMOKU：沈黙8秒/CT35秒
+const IREKAE_CD = 960;                                        // IREKAE：位置入れ替え/CT16秒
+const DEBUFF_MUL = 0.6, DEBUFF_DUR = 480, DEBUFF_CD = 1800;   // DEBUFF：弱体8秒/CT30秒
+const SLOWWORLD_DUR = 300, SLOWWORLD_CD = 1920;               // SLOWWORLD：減速5秒/CT32秒
+const TAIATARI_MOVE = { name:'体当たり', dmg:13, kb:10, kbg:0.13 };
+const TAIATARI_R = 120, TAIATARI_CD = 840;                    // TAIATARI：突進/CT14秒
+const BOUND_DUR = 480, BOUND_CD = 1560;                       // BOUND：弾む8秒/CT26秒
+const TSUNA_CD = 600;                                         // TSUNA：綱で復帰/CT10秒
+const SPLIT_MUL = 1.8, SPLIT_DUR = 480, BUNRETSU_CD = 1800;   // BUNRETSU：分裂8秒/CT30秒
+const MAKISHIN_CD = 1680;                                     // MAKISHIN：巻き戻し/CT28秒
+
 // ---- 加速（YOSENキャラ） ----
 const DASH_DUR = 480;            // 自分の速度1.5倍が続く8秒(480フレーム)
 const DASH_MUL = 1.5;            // 速度倍率
@@ -818,9 +842,29 @@ const CHARS = {
   chara_okane:     { id:'chara_okane',     name:'OKANE',      trait:'金', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'金型：発動で小判をばらまき、周囲の相手を吹き飛ばす（CT22秒）' },
   chara_chisana:   { id:'chara_chisana',   name:'CHISANA',    trait:'極小', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'極小型：発動で8秒間1/3サイズに。速度2倍＆当たり判定極小だが攻撃も小さい（CT30秒）' },
   chara_taiyou:    { id:'chara_taiyou',    name:'TAIYOU',     trait:'太陽', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'太陽型：発動で4秒間、相手だけ画面が真っ白になり見えなくなる（CT40秒）' },
+  chara_kaze:      { id:'chara_kaze',      name:'KAZE',       trait:'風', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'風型：発動で前方に強風を起こし、範囲内の相手を後ろへ押し流す（CT14秒）' },
+  chara_blackhole: { id:'chara_blackhole', name:'BLACKHOLE',  trait:'黒穴', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'黒穴型：発動で自分の位置に渦を作り、周囲の相手を2.5秒吸い込んで拘束（CT28秒）' },
+  chara_meteo:     { id:'chara_meteo',     name:'METEO',      trait:'隕石', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'隕石型：発動で3秒間、空からランダムに隕石が降り相手を吹き飛ばす（CT30秒）' },
+  chara_toge:      { id:'chara_toge',      name:'TOGE',       trait:'棘', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'棘型：発動で6秒間、殴ってきた相手に自動で反撃ダメージ＆小さく弾く（CT25秒）' },
+  chara_kusari:    { id:'chara_kusari',    name:'KUSARI',     trait:'鎖', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'鎖型：発動で最寄りの相手を鎖で自分の元へ強制的に引き寄せる（CT12秒）' },
+  chara_kaifuku:   { id:'chara_kaifuku',   name:'KAIFUKU',    trait:'回復', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'回復型：発動で自分のダメージ％を30%回復する（CT35秒）' },
+  chara_charge:    { id:'chara_charge',    name:'CHARGE',     trait:'溜め', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'溜め型：発動で次に当てる1発だけ威力・吹き飛ばしが3倍になる（CT25秒）' },
+  chara_shinitai:  { id:'chara_shinitai',  name:'SHINITAI',   trait:'擬死', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'擬死型：発動で3秒間その場に倒れ、動けないが攻撃を全て無効化（CT22秒）' },
+  chara_lifesteal: { id:'chara_lifesteal', name:'LIFESTEAL',  trait:'吸収', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'吸収型：発動で8秒間、相手に当てたダメージ分だけ自分の％を回復（CT30秒）' },
+  chara_hane:      { id:'chara_hane',      name:'HANE',       trait:'羽', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'羽型：発動で8秒間、落下速度が半分になりふわふわ浮けて復帰が安定（CT24秒）' },
+  chara_konran:    { id:'chara_konran',    name:'KONRAN',     trait:'混乱', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'混乱型：発動で相手全員の左右移動が6秒間ランダムに入れ替わる（CT30秒）' },
+  chara_chinmoku:  { id:'chara_chinmoku',  name:'CHINMOKU',   trait:'沈黙', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'沈黙型：発動で相手全員の特殊技（6つ目ボタン）を8秒間封じる（CT35秒）' },
+  chara_irekae:    { id:'chara_irekae',    name:'IREKAE',     trait:'転移', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'転移型：発動で最寄りの相手と位置を一瞬で入れ替える（CT16秒）' },
+  chara_debuff:    { id:'chara_debuff',    name:'DEBUFF',     trait:'弱体', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'弱体型：発動で相手全員の攻撃力と吹き飛ばしを8秒間0.6倍にする（CT30秒）' },
+  chara_slowworld: { id:'chara_slowworld', name:'SLOWWORLD',  trait:'減速', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'減速型：発動で自分以外の全員を5秒間スロー（動き・攻撃0.4倍速）にする（CT32秒）' },
+  chara_taiatari:  { id:'chara_taiatari',  name:'TAIATARI',   trait:'突進', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'突進型：発動で無敵状態で高速突進し、当たった相手を大きく吹き飛ばす（CT14秒）' },
+  chara_bound:     { id:'chara_bound',     name:'BOUND',      trait:'弾', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'弾型：発動で8秒間、着地するたびに大きく跳ね返り高速で動ける（CT26秒）' },
+  chara_tsuna:     { id:'chara_tsuna',     name:'TSUNA',      trait:'綱', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'綱型：発動で斜め上へワイヤーを撃ち一気に高く飛ぶ復帰技（CT10秒）' },
+  chara_bunretsu:  { id:'chara_bunretsu',  name:'BUNRETSU',   trait:'分裂', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'分裂型：発動で8秒間、攻撃の威力が大幅に上がる（2発分の判定）（CT30秒）' },
+  chara_makishin:  { id:'chara_makishin',  name:'MAKISHIN',   trait:'巻戻', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'巻戻型：発動で約2秒前の自分の位置とダメージ％に巻き戻る（CT28秒）' },
   chara_blind:     { id:'chara_blind',     name:'BLIND',      trait:'妨害', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'妨害型：発動で画面中央に大きな画像を5秒間表示し全員の視界を妨害（自分には半透明）。CT40秒' },
 };
-const CHAR_ORDER = ['chara_hpop','chara_yuton','chara_gasugaeso','chara_himan','chara_yosen','chara_math','chara_time','chara_slow','chara_q2','chara_superpower','chara_supergard','chara_reverse','chara_hell','chara_mirror','chara_nojumper','chara_hande','chara_banana','chara_blind','chara_big','chara_onlyjump','chara_toumei','chara_magnet','chara_bakudan','chara_kaminari','chara_gravity','chara_copy','chara_haneshi','chara_fukkatsu','chara_iwa','chara_bunshin','chara_warp','chara_tentou','chara_hayakuchi','chara_kuuki','chara_doku','chara_koori','chara_nemuri','chara_gacha','chara_okane','chara_chisana','chara_taiyou'];
+const CHAR_ORDER = ['chara_hpop','chara_yuton','chara_gasugaeso','chara_himan','chara_yosen','chara_math','chara_time','chara_slow','chara_q2','chara_superpower','chara_supergard','chara_reverse','chara_hell','chara_mirror','chara_nojumper','chara_hande','chara_banana','chara_blind','chara_big','chara_onlyjump','chara_toumei','chara_magnet','chara_bakudan','chara_kaminari','chara_gravity','chara_copy','chara_haneshi','chara_fukkatsu','chara_iwa','chara_bunshin','chara_warp','chara_tentou','chara_hayakuchi','chara_kuuki','chara_doku','chara_koori','chara_nemuri','chara_gacha','chara_okane','chara_chisana','chara_taiyou','chara_kaze','chara_blackhole','chara_meteo','chara_toge','chara_kusari','chara_kaifuku','chara_charge','chara_shinitai','chara_lifesteal','chara_hane','chara_konran','chara_chinmoku','chara_irekae','chara_debuff','chara_slowworld','chara_taiatari','chara_bound','chara_tsuna','chara_bunretsu','chara_makishin'];
 
 /* ======================= 1.1 カラーパレット（設計書 17.3） ======================= */
 const COLORS = [
@@ -1229,6 +1273,27 @@ class Fighter {
     this.okaneCooldown = 0;
     this.tinyTimer = 0; this.tinyCooldown = 0;
     this.taiyouCooldown = 0;
+    // 追加キャラ群2
+    this.kazeCooldown = 0;
+    this.blackholeTimer = 0; this.blackholeCooldown = 0; this.holeX = 0; this.holeY = 0;
+    this.meteoTimer = 0; this.meteoCooldown = 0;
+    this.thornTimer = 0; this.thornCooldown = 0;
+    this.kusariCooldown = 0;
+    this.kaifukuCooldown = 0;
+    this.chargeReady = false; this.chargeCooldown = 0;
+    this.playdeadTimer = 0; this.playdeadCooldown = 0;
+    this.lifestealTimer = 0; this.lifestealCooldown = 0;
+    this.haneTimer = 0; this.haneCooldown = 0;
+    this.confusedTimer = 0; this.konranCooldown = 0;
+    this.silencedTimer = 0; this.chinmokuCooldown = 0;
+    this.irekaeCooldown = 0;
+    this.debuffTimer = 0; this.debuffCooldown = 0;
+    this.slowworldCooldown = 0;
+    this.taiatariCooldown = 0;
+    this.bounceTimer = 0; this.boundCooldown = 0;
+    this.tsunaCooldown = 0;
+    this.splitTimer = 0; this.bunretsuCooldown = 0;
+    this.makishinCooldown = 0; this._hist = [];
     this.dashBoost = 0; this.dashCooldown = 0;   // YOSEN：加速残り／CD
     this.shatterMode = 0; this.shatterCooldown = 0;   // HPOP：シールド一撃割り残り／CD
     this.invincible = 0; this.invincCooldown = 0;   // YUTON：無敵残り／CD
@@ -1284,6 +1349,26 @@ class Fighter {
     if (this.def.id === 'chara_okane') return this.okaneCooldown;
     if (this.def.id === 'chara_chisana') return this.tinyCooldown;
     if (this.def.id === 'chara_taiyou') return this.taiyouCooldown;
+    if (this.def.id === 'chara_kaze') return this.kazeCooldown;
+    if (this.def.id === 'chara_blackhole') return this.blackholeCooldown;
+    if (this.def.id === 'chara_meteo') return this.meteoCooldown;
+    if (this.def.id === 'chara_toge') return this.thornCooldown;
+    if (this.def.id === 'chara_kusari') return this.kusariCooldown;
+    if (this.def.id === 'chara_kaifuku') return this.kaifukuCooldown;
+    if (this.def.id === 'chara_charge') return this.chargeCooldown;
+    if (this.def.id === 'chara_shinitai') return this.playdeadCooldown;
+    if (this.def.id === 'chara_lifesteal') return this.lifestealCooldown;
+    if (this.def.id === 'chara_hane') return this.haneCooldown;
+    if (this.def.id === 'chara_konran') return this.konranCooldown;
+    if (this.def.id === 'chara_chinmoku') return this.chinmokuCooldown;
+    if (this.def.id === 'chara_irekae') return this.irekaeCooldown;
+    if (this.def.id === 'chara_debuff') return this.debuffCooldown;
+    if (this.def.id === 'chara_slowworld') return this.slowworldCooldown;
+    if (this.def.id === 'chara_taiatari') return this.taiatariCooldown;
+    if (this.def.id === 'chara_bound') return this.boundCooldown;
+    if (this.def.id === 'chara_tsuna') return this.tsunaCooldown;
+    if (this.def.id === 'chara_bunretsu') return this.bunretsuCooldown;
+    if (this.def.id === 'chara_makishin') return this.makishinCooldown;
     if (this.def.id === 'chara_yosen') return this.dashCooldown;
     if (this.def.id === 'chara_hpop') return this.shatterCooldown;
     if (this.def.id === 'chara_yuton') return this.invincCooldown;
@@ -1323,6 +1408,26 @@ class Fighter {
     if (this.def.id === 'chara_okane') return OKANE_CD;
     if (this.def.id === 'chara_chisana') return TINY_CD;
     if (this.def.id === 'chara_taiyou') return SUN_CD;
+    if (this.def.id === 'chara_kaze') return KAZE_CD;
+    if (this.def.id === 'chara_blackhole') return HOLE_CD;
+    if (this.def.id === 'chara_meteo') return METEO_CD;
+    if (this.def.id === 'chara_toge') return THORN_CD;
+    if (this.def.id === 'chara_kusari') return KUSARI_CD;
+    if (this.def.id === 'chara_kaifuku') return KAIFUKU_CD;
+    if (this.def.id === 'chara_charge') return CHARGE_CD;
+    if (this.def.id === 'chara_shinitai') return PLAYDEAD_CD;
+    if (this.def.id === 'chara_lifesteal') return LIFESTEAL_CD;
+    if (this.def.id === 'chara_hane') return HANE_CD;
+    if (this.def.id === 'chara_konran') return KONRAN_CD;
+    if (this.def.id === 'chara_chinmoku') return SILENCE_CD;
+    if (this.def.id === 'chara_irekae') return IREKAE_CD;
+    if (this.def.id === 'chara_debuff') return DEBUFF_CD;
+    if (this.def.id === 'chara_slowworld') return SLOWWORLD_CD;
+    if (this.def.id === 'chara_taiatari') return TAIATARI_CD;
+    if (this.def.id === 'chara_bound') return BOUND_CD;
+    if (this.def.id === 'chara_tsuna') return TSUNA_CD;
+    if (this.def.id === 'chara_bunretsu') return BUNRETSU_CD;
+    if (this.def.id === 'chara_makishin') return MAKISHIN_CD;
     if (this.def.id === 'chara_yosen') return DASH_CD;
     if (this.def.id === 'chara_hpop') return SHATTER_CD;
     if (this.def.id === 'chara_yuton') return INVINC_CD;
@@ -1365,6 +1470,26 @@ class Fighter {
     if (this.def.id === 'chara_okane') opts.push({ type:'okane', icon:'🪙', label:'小判' });
     if (this.def.id === 'chara_chisana') opts.push({ type:'chisana', icon:'🐜', label:'極小化' });
     if (this.def.id === 'chara_taiyou') opts.push({ type:'taiyou', icon:'☀️', label:'目つぶし' });
+    if (this.def.id === 'chara_kaze') opts.push({ type:'kaze', icon:'🌬️', label:'突風' });
+    if (this.def.id === 'chara_blackhole') opts.push({ type:'blackhole', icon:'🕳️', label:'黒穴' });
+    if (this.def.id === 'chara_meteo') opts.push({ type:'meteo', icon:'☄️', label:'隕石' });
+    if (this.def.id === 'chara_toge') opts.push({ type:'toge', icon:'🌵', label:'棘' });
+    if (this.def.id === 'chara_kusari') opts.push({ type:'kusari', icon:'⛓️', label:'鎖' });
+    if (this.def.id === 'chara_kaifuku') opts.push({ type:'kaifuku', icon:'💚', label:'回復' });
+    if (this.def.id === 'chara_charge') opts.push({ type:'charge', icon:'🔋', label:'溜め' });
+    if (this.def.id === 'chara_shinitai') opts.push({ type:'shinitai', icon:'💀', label:'死んだふり' });
+    if (this.def.id === 'chara_lifesteal') opts.push({ type:'lifesteal', icon:'🩸', label:'吸収' });
+    if (this.def.id === 'chara_hane') opts.push({ type:'hane', icon:'🪶', label:'羽' });
+    if (this.def.id === 'chara_konran') opts.push({ type:'konran', icon:'😵', label:'混乱' });
+    if (this.def.id === 'chara_chinmoku') opts.push({ type:'chinmoku', icon:'🤐', label:'沈黙' });
+    if (this.def.id === 'chara_irekae') opts.push({ type:'irekae', icon:'🔀', label:'入れ替え' });
+    if (this.def.id === 'chara_debuff') opts.push({ type:'debuff', icon:'📉', label:'弱体' });
+    if (this.def.id === 'chara_slowworld') opts.push({ type:'slowworld', icon:'🐢', label:'減速世界' });
+    if (this.def.id === 'chara_taiatari') opts.push({ type:'taiatari', icon:'🐗', label:'体当たり' });
+    if (this.def.id === 'chara_bound') opts.push({ type:'bound', icon:'🏀', label:'弾む' });
+    if (this.def.id === 'chara_tsuna') opts.push({ type:'tsuna', icon:'🪝', label:'綱' });
+    if (this.def.id === 'chara_bunretsu') opts.push({ type:'bunretsu', icon:'✌️', label:'分裂' });
+    if (this.def.id === 'chara_makishin') opts.push({ type:'makishin', icon:'⏪', label:'巻き戻し' });
     if (this.def.id === 'chara_yosen') opts.push({ type:'dash', icon:'💨', label:'加速' });
     if (this.def.id === 'chara_himan') opts.push({ type:'weapon', weapon:'daidaiken', icon:WEAPONS.daidaiken.icon, label:'大大剣' });
     if (this.def.id === 'chara_hpop') opts.push({ type:'shatter', icon:'🛡️', label:'シールド粉砕' });
@@ -1378,6 +1503,8 @@ class Fighter {
   applyBoxSelection(world) {
     const opts = this.boxOptions(), o = opts[this.boxSel];
     if (!o) { this.boxOpen = false; return; }
+    // CHINMOKU：沈黙中は特殊技（武器・素手以外）を発動できない
+    if (this.silencedTimer > 0 && o.type !== 'weapon' && o.type !== 'bare') { this.boxOpen = false; Sound.play('se_item_close'); return; }
     if (o.type === 'weapon') {
       this.boxOpen = false;
       if (o.weapon === 'bomb') {
@@ -1644,6 +1771,159 @@ class Fighter {
       this.taiyouCooldown = SUN_CD;
       Sound.play('se_special_activate');
     }
+    else if (o.type === 'kaze') {
+      this.boxOpen = false;
+      if (this.kazeCooldown > 0) { Sound.play('se_item_close'); return; }
+      for (const other of world.fighters) {
+        if (other === this || other.dead || other.respawnTimer > 0) continue;
+        if (other.invincible > 0 || other.ironTimer > 0) continue;
+        if ((other.x - this.x) * this.facing > 0 && Math.abs(other.x - this.x) < KAZE_R) {   // 前方の相手のみ押し流す
+          other.vx = this.facing * KAZE_PUSH; other.vy = -4; other.grounded = false; other.hitstun = Math.max(other.hitstun, 12);
+        }
+      }
+      this.kazeCooldown = KAZE_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'blackhole') {
+      this.boxOpen = false;
+      if (this.blackholeCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.holeX = this.x; this.holeY = this.y - 40; this.blackholeTimer = HOLE_DUR;
+      this.blackholeCooldown = HOLE_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'meteo') {
+      this.boxOpen = false;
+      if (this.meteoCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.meteoTimer = METEO_DUR; this.meteoCooldown = METEO_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'toge') {
+      this.boxOpen = false;
+      if (this.thornCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.thornTimer = THORN_DUR; this.thornCooldown = THORN_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'kusari') {
+      this.boxOpen = false;
+      if (this.kusariCooldown > 0) { Sound.play('se_item_close'); return; }
+      let near = null, nd = 1e9;
+      for (const other of world.fighters) {
+        if (other === this || other.dead || other.respawnTimer > 0) continue;
+        if (other.invincible > 0 || other.ironTimer > 0) continue;
+        const d = Math.abs(other.x - this.x); if (d < nd) { nd = d; near = other; }
+      }
+      if (near) { const dir = (this.x >= near.x) ? 1 : -1; near.vx = dir * KUSARI_PULL; near.vy = -5; near.grounded = false; near.hitstun = Math.max(near.hitstun, 10); }
+      this.kusariCooldown = KUSARI_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'kaifuku') {
+      this.boxOpen = false;
+      if (this.kaifukuCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.damage = Math.max(this.startDamage(), this.damage - KAIFUKU_HEAL);
+      this.kaifukuCooldown = KAIFUKU_CD;
+      Sound.play('se_special_ready');
+    }
+    else if (o.type === 'charge') {
+      this.boxOpen = false;
+      if (this.chargeCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.chargeReady = true; this.chargeCooldown = CHARGE_CD; this.weaponFlash = 20;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'shinitai') {
+      this.boxOpen = false;
+      if (this.playdeadCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.playdeadTimer = PLAYDEAD_DUR; this.playdeadCooldown = PLAYDEAD_CD; this.vx = 0;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'lifesteal') {
+      this.boxOpen = false;
+      if (this.lifestealCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.lifestealTimer = LIFESTEAL_DUR; this.lifestealCooldown = LIFESTEAL_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'hane') {
+      this.boxOpen = false;
+      if (this.haneCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.haneTimer = HANE_DUR; this.haneCooldown = HANE_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'konran') {
+      this.boxOpen = false;
+      if (this.konranCooldown > 0) { Sound.play('se_item_close'); return; }
+      for (const other of world.fighters) { if (other !== this && !other.dead && other.respawnTimer <= 0) other.confusedTimer = KONRAN_DUR; }
+      this.konranCooldown = KONRAN_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'chinmoku') {
+      this.boxOpen = false;
+      if (this.chinmokuCooldown > 0) { Sound.play('se_item_close'); return; }
+      for (const other of world.fighters) { if (other !== this && !other.dead && other.respawnTimer <= 0) other.silencedTimer = SILENCE_DUR; }
+      this.chinmokuCooldown = SILENCE_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'irekae') {
+      this.boxOpen = false;
+      if (this.irekaeCooldown > 0) { Sound.play('se_item_close'); return; }
+      let near = null, nd = 1e9;
+      for (const other of world.fighters) {
+        if (other === this || other.dead || other.respawnTimer > 0) continue;
+        const d = Math.abs(other.x - this.x); if (d < nd) { nd = d; near = other; }
+      }
+      if (near) { const tx = this.x, ty = this.y; this.x = near.x; this.y = near.y; near.x = tx; near.y = ty; this.invuln = Math.max(this.invuln, 15); }
+      this.irekaeCooldown = IREKAE_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'debuff') {
+      this.boxOpen = false;
+      if (this.debuffCooldown > 0) { Sound.play('se_item_close'); return; }
+      for (const other of world.fighters) { if (other !== this && !other.dead && other.respawnTimer <= 0) other.debuffTimer = DEBUFF_DUR; }
+      this.debuffCooldown = DEBUFF_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'slowworld') {
+      this.boxOpen = false;
+      if (this.slowworldCooldown > 0) { Sound.play('se_item_close'); return; }
+      for (const other of world.fighters) { if (other !== this && !other.dead && other.respawnTimer <= 0) other.slowed = SLOWWORLD_DUR; }
+      this.slowworldCooldown = SLOWWORLD_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'taiatari') {
+      this.boxOpen = false;
+      if (this.taiatariCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.invuln = Math.max(this.invuln, 30); this.vx = this.facing * 24; this.vy = -2; this.grounded = false;
+      for (const other of world.fighters) {
+        if (other === this || other.dead || other.respawnTimer > 0) continue;
+        if ((other.x - this.x) * this.facing >= 0 && Math.abs(other.x - this.x) < TAIATARI_R + 100) other.receiveHit(TAIATARI_MOVE, this, world);
+      }
+      this.taiatariCooldown = TAIATARI_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'bound') {
+      this.boxOpen = false;
+      if (this.boundCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.bounceTimer = BOUND_DUR; this.boundCooldown = BOUND_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'tsuna') {
+      this.boxOpen = false;
+      if (this.tsunaCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.vy = -20; this.vx = this.facing * 8; this.grounded = false; this.jumpsLeft = this.def.jumps;
+      this.tsunaCooldown = TSUNA_CD;
+      Sound.play('se_jump3');
+    }
+    else if (o.type === 'bunretsu') {
+      this.boxOpen = false;
+      if (this.bunretsuCooldown > 0) { Sound.play('se_item_close'); return; }
+      this.splitTimer = SPLIT_DUR; this.bunretsuCooldown = BUNRETSU_CD;
+      Sound.play('se_special_activate');
+    }
+    else if (o.type === 'makishin') {
+      this.boxOpen = false;
+      if (this.makishinCooldown > 0) { Sound.play('se_item_close'); return; }
+      if (this._hist && this._hist.length > 0) { const h = this._hist[0]; this.x = h.x; this.y = h.y; this.damage = h.d; this.vx = 0; this.vy = 0; this.invuln = Math.max(this.invuln, 20); }
+      this.makishinCooldown = MAKISHIN_CD;
+      Sound.play('se_special_activate');
+    }
     else if (o.type === 'dash') {
       this.boxOpen = false;
       if (this.dashCooldown > 0) { Sound.play('se_item_close'); return; }   // クールタイム中は発動不可
@@ -1723,12 +2003,13 @@ class Fighter {
   predictStep(ctrl) {
     let dx = ctrl.dirX();
     if (this.reversed > 0) dx = -dx;   // 操作反転（REVERSE被弾／TENTOU）
-    if (this.jumpOnly > 0 || this.stunned > 0 || this.ironTimer > 0) dx = 0;   // ジャンプのみ／麻痺／岩：横移動不可
+    if (this.confusedTimer > 0 && Math.floor(this.animT / 24) % 2 === 0) dx = -dx;   // KONRAN：混乱
+    if (this.jumpOnly > 0 || this.stunned > 0 || this.ironTimer > 0 || this.playdeadTimer > 0) dx = 0;   // ジャンプのみ／麻痺／岩／擬死：横移動不可
     if (this.flyTimer > 0) this.jumpsLeft = this.def.jumps;   // 飛行：無限ジャンプ
     if (dx !== 0) { this.vx = lerp(this.vx, dx * this.moveSpeed, 0.4); this.facing = dx; }
     else this.vx *= this.grounded ? FRICTION_G : FRICTION_A;
     if (ctrl.edge.X && this.jumpsLeft > 0 && this.jumpBlocked <= 0 && this.stunned <= 0 && this.ironTimer <= 0) { this.vy = JUMP_V; this.jumpsLeft--; this.grounded = false; }
-    this.vy += GRAVITY * (this.heavyTimer > 0 ? HEAVY_MUL : 1); if (this.vy > 22) this.vy = 22;
+    this.vy += GRAVITY * (this.heavyTimer > 0 ? HEAVY_MUL : (this.haneTimer > 0 ? 0.5 : 1)); if (this.vy > 22) this.vy = 22;
     const prevFeet = this.y;
     this.x += this.vx; this.y += this.vy;
     this.grounded = false;
@@ -1808,6 +2089,61 @@ class Fighter {
     if (this.tinyCooldown > 0) this.tinyCooldown--;
     if (this.tinyTimer > 0) this.tinyTimer--;
     if (this.taiyouCooldown > 0) this.taiyouCooldown--;
+    if (this.kazeCooldown > 0) this.kazeCooldown--;
+    if (this.blackholeCooldown > 0) this.blackholeCooldown--;
+    if (this.meteoCooldown > 0) this.meteoCooldown--;
+    if (this.thornCooldown > 0) this.thornCooldown--;
+    if (this.thornTimer > 0) this.thornTimer--;
+    if (this.kusariCooldown > 0) this.kusariCooldown--;
+    if (this.kaifukuCooldown > 0) this.kaifukuCooldown--;
+    if (this.chargeCooldown > 0) this.chargeCooldown--;
+    if (this.playdeadCooldown > 0) this.playdeadCooldown--;
+    if (this.playdeadTimer > 0) this.playdeadTimer--;
+    if (this.lifestealCooldown > 0) this.lifestealCooldown--;
+    if (this.lifestealTimer > 0) this.lifestealTimer--;
+    if (this.haneCooldown > 0) this.haneCooldown--;
+    if (this.haneTimer > 0) this.haneTimer--;
+    if (this.konranCooldown > 0) this.konranCooldown--;
+    if (this.confusedTimer > 0) this.confusedTimer--;
+    if (this.chinmokuCooldown > 0) this.chinmokuCooldown--;
+    if (this.silencedTimer > 0) this.silencedTimer--;
+    if (this.irekaeCooldown > 0) this.irekaeCooldown--;
+    if (this.debuffCooldown > 0) this.debuffCooldown--;
+    if (this.debuffTimer > 0) this.debuffTimer--;
+    if (this.slowworldCooldown > 0) this.slowworldCooldown--;
+    if (this.taiatariCooldown > 0) this.taiatariCooldown--;
+    if (this.boundCooldown > 0) this.boundCooldown--;
+    if (this.bounceTimer > 0) this.bounceTimer--;
+    if (this.tsunaCooldown > 0) this.tsunaCooldown--;
+    if (this.bunretsuCooldown > 0) this.bunretsuCooldown--;
+    if (this.splitTimer > 0) this.splitTimer--;
+    if (this.makishinCooldown > 0) this.makishinCooldown--;
+    // MAKISHIN：位置・ダメージ履歴を約2秒分（120フレーム）記録
+    this._hist.push({ x: this.x, y: this.y, d: this.damage });
+    if (this._hist.length > 120) this._hist.shift();
+    // BLACKHOLE：発動中は周囲の相手を中心へ吸い込んで拘束
+    if (this.blackholeTimer > 0) {
+      this.blackholeTimer--;
+      for (const other of world.fighters) {
+        if (other === this || other.dead || other.respawnTimer > 0) continue;
+        if (other.invincible > 0 || other.ironTimer > 0) continue;
+        other.x += (this.holeX - other.x) * 0.25; other.y += (this.holeY - other.y) * 0.25;
+        other.vx = 0; other.vy = 0; other.stunned = Math.max(other.stunned, 3);
+      }
+    }
+    // METEO：発動中は一定間隔でランダムな位置に隕石を落とす
+    if (this.meteoTimer > 0) {
+      this.meteoTimer--;
+      if (this.meteoTimer % 18 === 0) {
+        const mx = STAGE.main.x1 + Math.random() * (STAGE.main.x2 - STAGE.main.x1);
+        for (const other of world.fighters) {
+          if (other === this || other.dead || other.respawnTimer > 0) continue;
+          if (Math.abs(other.x - mx) < 75) other.receiveHit(METEO_MOVE, this, world);
+        }
+        for (let k = 0; k < 5; k++) spawnHitSpark(mx + (Math.random() * 60 - 30), STAGE.main.y - 40 - Math.random() * 220);
+        Sound.play('se_burst');
+      }
+    }
     if (this.dashBoost > 0) this.dashBoost--;
     if (this.dashCooldown > 0) this.dashCooldown--;
     if (this.shatterMode > 0) this.shatterMode--;
@@ -1901,6 +2237,8 @@ class Fighter {
       this.vx *= FRICTION_G;            // 落雷で麻痺：行動不能（重力は通常通りかかる）
     } else if (this.ironTimer > 0) {
       this.vx *= FRICTION_G;            // IWA：岩化中は動けない（重力で地面に留まる）
+    } else if (this.playdeadTimer > 0) {
+      this.vx *= FRICTION_G;            // SHINITAI：擬死中は動けない
     } else if (controllable) {
       // ---- A：ボックスを開く ----
       if (ctrl.edge.A && this.jumpOnly <= 0) { this.boxOpen = true; this.boxSel = 0; Sound.play('se_item_open'); }
@@ -1947,6 +2285,7 @@ class Fighter {
       // ---- 移動（スマッシュ中は足を止める。溜め中は向きだけ変えられる） ----
       let dx = (ctrl.moveX ? ctrl.moveX() : ctrl.dirX());
       if (this.reversed > 0) dx = -dx;   // リバース被弾中：移動入力が逆になる
+      if (this.confusedTimer > 0 && Math.floor(this.animT / 24) % 2 === 0) dx = -dx;   // KONRAN：混乱（左右がランダムに入れ替わる）
       if (this.jumpOnly > 0) dx = 0;     // ジャンプのみ状態：横移動不可（ジャンプだけ可能）
       if (this.airDodgeT > 0) {
         this.vx *= 0.94; this.vy *= 0.94;   // 空中ドッジの慣性を保つ（通常移動で上書きしない）
@@ -1991,7 +2330,7 @@ class Fighter {
     if (this.airSmashHover > 0) {
       this.vx = 0; this.vy = 0;   // 空中スマッシュ中：その場の高さに静止
     } else {
-      this.vy += (this.airDodgeT > 0 ? GRAVITY * 0.25 : GRAVITY) * (this.heavyTimer > 0 ? HEAVY_MUL : 1);   // 空中ドッジ中は重力を弱めて回避軌道を保つ。GRAVITY被弾中は重力3倍
+      this.vy += (this.airDodgeT > 0 ? GRAVITY * 0.25 : GRAVITY) * (this.heavyTimer > 0 ? HEAVY_MUL : (this.haneTimer > 0 ? 0.5 : 1));   // 空中ドッジで弱め／GRAVITYで3倍／HANEで半分
       // 空中で下入力：急降下（落下速度の上限を引き上げ）
       const fastFall = this.hitstun <= 0 && !this.grounded && ctrl && ctrl.held && ctrl.held.down && !ctrl.held.Y && this.vy > -1;   // Y押下中（下スマッシュ等）は急降下しない
       if (fastFall) this.vy += 1.6;
@@ -2007,7 +2346,9 @@ class Fighter {
     if (this.vy >= 0) {
       for (const p of PLATFORMS) {
         if (this.x > p.x1 - 14 && this.x < p.x2 + 14 && prevFeet <= p.y + 6 && this.y >= p.y && this.y - this.vy <= p.y + 8) {
-          this.y = p.y; this.vy = 0; this.grounded = true; break;
+          if (this.bounceTimer > 0) { this.y = p.y; this.vy = JUMP_V; this.grounded = false; }   // BOUND：着地するたび大きく跳ね返る
+          else { this.y = p.y; this.vy = 0; this.grounded = true; }
+          break;
         }
       }
     }
@@ -2205,7 +2546,7 @@ class Fighter {
 
   receiveHit(move, attacker, world, _reflected) {
     if (this.invuln > 0 || this.invincible > 0 || this.dead || this.respawnTimer > 0) return;
-    if (this.ironTimer > 0) { spawnHitSpark(this.x, this.y - 40); Sound.play('se_weapon_hit'); return; }   // IWA：岩化中はダメージ・吹っ飛び無効
+    if (this.ironTimer > 0 || this.playdeadTimer > 0) { spawnHitSpark(this.x, this.y - 40); Sound.play('se_weapon_hit'); return; }   // IWA岩化／SHINITAI擬死：ダメージ・吹っ飛び無効
     if (this.reflectTimer > 0 && !_reflected && attacker && attacker !== this) {   // HANESHI：受けた攻撃を相手に跳ね返す
       spawnHitSpark(this.x, this.y - 40); Sound.play('se_weapon_hit');
       if (!attacker.dead && attacker.respawnTimer <= 0) attacker.receiveHit(move, this, world, true);
@@ -2225,13 +2566,19 @@ class Fighter {
       if (this.shield <= 0) this.breakGuard();
       return;
     }
-    const dealt = move.dmg * attacker.def.atk;
+    let atkMul = 1;
+    if (attacker.chargeReady) { atkMul *= CHARGE_MUL; attacker.chargeReady = false; attacker.weaponFlash = 12; }   // CHARGE：溜めた一撃3倍
+    if (attacker.splitTimer > 0) atkMul *= SPLIT_MUL;                                                              // BUNRETSU：分裂（2発分の威力）
+    if (attacker.debuffTimer > 0) atkMul *= DEBUFF_MUL;                                                            // DEBUFF：攻撃弱体0.6倍
+    const dealt = move.dmg * attacker.def.atk * atkMul;
     this.damage += dealt * this.def.def;           // 与ダメ×攻撃倍率, 被ダメ×防御倍率（設計書 5）
+    if (attacker.lifestealTimer > 0) attacker.damage = Math.max(attacker.startDamage(), attacker.damage - dealt);   // LIFESTEAL：与ダメ分だけ自分を回復
     // 吹っ飛び（設計書 9）：dist = (kb + dmg% × kbg) / 体重 × 100 × 被ダメ係数
     let mag = (move.kb + this.damage * (move.kbg || 0.08)) * (100 / this.def.weight) * this.def.def;
     if (attacker.superPower > 0) mag *= SUPER_KB;   // スーパーパワー発動中：ノックバック1.7倍
     if (attacker.bigTimer > 0) mag *= BIG_KB;       // 巨大化中：与ノックバック1.3倍
     mag *= (attacker.def.kbDealtMul || 1);          // hell等：相手を吹っ飛ばす距離の倍率
+    mag *= atkMul;                                  // CHARGE/BUNRETSU/DEBUFF：吹っ飛ばしにも反映
     if (attacker.reverseMode > 0) this.reversed = REVERSE_HIT;   // リバース発動中の攻撃を受けた相手は操作反転
     const dir = (attacker.x <= this.x) ? 1 : -1;
     let ux = dir, uy = -0.5;
@@ -2251,6 +2598,12 @@ class Fighter {
     else if (move.knockback) Sound.playHitWithDamage(this.damage);
     else Sound.play('se_punch1');
     spawnHitSpark(this.x, this.y - 40);
+    // TOGE：棘をまとっている間、殴ってきた近接の相手に反撃ダメージ＆小さく弾く
+    if (this.thornTimer > 0 && attacker && attacker !== this && !attacker.dead && attacker.respawnTimer <= 0 && !move.proj && attacker.invuln <= 0 && attacker.invincible <= 0) {
+      const back = (this.x <= attacker.x) ? 1 : -1;
+      attacker.damage += 4 * attacker.def.def; attacker.vx = back * 6; attacker.vy = -3; attacker.hitstun = Math.max(attacker.hitstun, 10); attacker.grounded = false;
+      spawnHitSpark(attacker.x, attacker.y - 40);
+    }
     // 分身：攻撃を食らった数を数え、5発でいなくなる
     if (this.isClone && ++this.cloneHits >= MIRROR_HITS) { this.dead = true; this._remove = true; }
   }
@@ -2617,6 +2970,17 @@ function drawCharacter(ctx, f) {
     else if (f.flyTimer > 0) ic = '🕊️';
     else if (f.hasteTimer > 0) ic = '💨';
     else if (f.reviveReady) ic = '💗';
+    else if (f.playdeadTimer > 0) ic = '💀';
+    else if (f.thornTimer > 0) ic = '🌵';
+    else if (f.lifestealTimer > 0) ic = '🩸';
+    else if (f.haneTimer > 0) ic = '🪶';
+    else if (f.confusedTimer > 0) ic = '😵';
+    else if (f.silencedTimer > 0) ic = '🤐';
+    else if (f.debuffTimer > 0) ic = '📉';
+    else if (f.bounceTimer > 0) ic = '🏀';
+    else if (f.splitTimer > 0) ic = '✌️';
+    else if (f.chargeReady) ic = '🔋';
+    else if (f.blackholeTimer > 0) ic = '🕳️';
     if (ic) { ctx.save(); ctx.font = '22px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(ic, f.x, f.y - 100); ctx.restore(); }
   }
   // ---- GACHA：出た結果のラベルを頭上に ----
@@ -3178,7 +3542,9 @@ const Game = {
     cv.style.maxWidth = 'none'; cv.style.maxHeight = 'none';
     // 全体フィット・中央固定・スクロール一切禁止のシーン（対戦中＋タイトル）。
     // それ以外（各選択/説明/リザルト等）は幅にフィットして大きく表示し、縦に収まらなければスクロール可。
-    const battleView = (this.scene === 'battle' || this.scene === 'countdown' || this.scene === 'title');
+    // charselectはカード群を内部スクロールで自己完結させているため、ページスクロールは禁止して全体フィット表示にする
+    // （スマホ横画面で内部スクロールとページスクロールが干渉するのを防ぐ）
+    const battleView = (this.scene === 'battle' || this.scene === 'countdown' || this.scene === 'title' || this.scene === 'charselect');
     let s;
     if (battleView) {
       s = Math.min(vw / W, vh / H);
@@ -3711,6 +4077,17 @@ const Game = {
         rf: f.reflectTimer > 0 ? 1 : 0,
         rv: f.reviveReady ? 1 : 0,
         ha: f.hasteTimer > 0 ? 1 : 0,
+        pd: f.playdeadTimer > 0 ? 1 : 0,
+        hn: f.haneTimer > 0 ? 1 : 0,
+        cf: f.confusedTimer > 0 ? 1 : 0,
+        th: f.thornTimer > 0 ? 1 : 0,
+        ls: f.lifestealTimer > 0 ? 1 : 0,
+        db: f.debuffTimer > 0 ? 1 : 0,
+        cg: f.chargeReady ? 1 : 0,
+        bn: f.bounceTimer > 0 ? 1 : 0,
+        spl: f.splitTimer > 0 ? 1 : 0,
+        bh: f.blackholeTimer > 0 ? 1 : 0,
+        si: f.silencedTimer > 0 ? 1 : 0,
         db: f.dashBoost > 0 ? 1 : 0,
         sm: f.shatterMode > 0 ? 1 : 0,
         ivc: f.invincible > 0 ? 1 : 0,
@@ -3778,6 +4155,17 @@ const Game = {
       f.reflectTimer = s.rf ? 1 : 0;
       f.reviveReady = !!s.rv;
       f.hasteTimer = s.ha ? 1 : 0;
+      f.playdeadTimer = s.pd ? 1 : 0;
+      f.haneTimer = s.hn ? 1 : 0;
+      f.confusedTimer = s.cf ? 1 : 0;
+      f.thornTimer = s.th ? 1 : 0;
+      f.lifestealTimer = s.ls ? 1 : 0;
+      f.debuffTimer = s.db ? 1 : 0;
+      f.chargeReady = !!s.cg;
+      f.bounceTimer = s.bn ? 1 : 0;
+      f.splitTimer = s.spl ? 1 : 0;
+      f.blackholeTimer = s.bh ? 1 : 0;
+      f.silencedTimer = s.si ? 1 : 0;
       f.dashBoost = s.db ? 1 : 0;
       f.shatterMode = s.sm ? 1 : 0;
       f.invincible = s.ivc ? 1 : 0;
@@ -3818,6 +4206,26 @@ const Game = {
       else if (f.def.id === 'chara_okane') f.okaneCooldown = _cd;
       else if (f.def.id === 'chara_chisana') f.tinyCooldown = _cd;
       else if (f.def.id === 'chara_taiyou') f.taiyouCooldown = _cd;
+      else if (f.def.id === 'chara_kaze') f.kazeCooldown = _cd;
+      else if (f.def.id === 'chara_blackhole') f.blackholeCooldown = _cd;
+      else if (f.def.id === 'chara_meteo') f.meteoCooldown = _cd;
+      else if (f.def.id === 'chara_toge') f.thornCooldown = _cd;
+      else if (f.def.id === 'chara_kusari') f.kusariCooldown = _cd;
+      else if (f.def.id === 'chara_kaifuku') f.kaifukuCooldown = _cd;
+      else if (f.def.id === 'chara_charge') f.chargeCooldown = _cd;
+      else if (f.def.id === 'chara_shinitai') f.playdeadCooldown = _cd;
+      else if (f.def.id === 'chara_lifesteal') f.lifestealCooldown = _cd;
+      else if (f.def.id === 'chara_hane') f.haneCooldown = _cd;
+      else if (f.def.id === 'chara_konran') f.konranCooldown = _cd;
+      else if (f.def.id === 'chara_chinmoku') f.chinmokuCooldown = _cd;
+      else if (f.def.id === 'chara_irekae') f.irekaeCooldown = _cd;
+      else if (f.def.id === 'chara_debuff') f.debuffCooldown = _cd;
+      else if (f.def.id === 'chara_slowworld') f.slowworldCooldown = _cd;
+      else if (f.def.id === 'chara_taiatari') f.taiatariCooldown = _cd;
+      else if (f.def.id === 'chara_bound') f.boundCooldown = _cd;
+      else if (f.def.id === 'chara_tsuna') f.tsunaCooldown = _cd;
+      else if (f.def.id === 'chara_bunretsu') f.bunretsuCooldown = _cd;
+      else if (f.def.id === 'chara_makishin') f.makishinCooldown = _cd;
       else if (f.def.id === 'chara_yosen') f.dashCooldown = _cd;
       else if (f.def.id === 'chara_hpop') f.shatterCooldown = _cd;
       else if (f.def.id === 'chara_yuton') f.invincCooldown = _cd;
