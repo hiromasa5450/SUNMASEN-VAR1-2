@@ -828,7 +828,7 @@ const CHARS = {
   chara_gravity:   { id:'chara_gravity',   name:'GRAVITY',    trait:'重力', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'重力型：発動で相手全員だけ6秒間重力3倍。ジャンプが極端に低くなる（CT30秒）' },
   chara_copy:      { id:'chara_copy',      name:'COPY',       trait:'複製', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'複製型：発動で直近に自分を殴った相手の武器を8秒コピーして装備（CT40秒）' },
   chara_haneshi:   { id:'chara_haneshi',   name:'HANESHI',    trait:'反射', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'反射型：発動で5秒間、受けた攻撃を相手に跳ね返す（CT35秒）' },
-  chara_fukkatsu:  { id:'chara_fukkatsu',  name:'FUKKATSU',   trait:'復活', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'復活型：発動すると次に撃墜されても1回だけストックを失わず復活（CT60秒）' },
+  chara_fukkatsu:  { id:'chara_fukkatsu',  name:'FUKKATSU',   trait:'復活', speed:5, jumps:3, atk:0.8, def:1.0, weight:100, desc:'復活型：与ダメージ0.8倍。ストックを失った後、一試合に1回だけ発動でき、次の撃墜をストックを失わず復活できる' },
   chara_iwa:       { id:'chara_iwa',       name:'IWA',        trait:'岩', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'岩型：発動で4秒間、動けないが被ダメージ0＆吹っ飛ばない岩になる（CT20秒）' },
   chara_bunshin:   { id:'chara_bunshin',   name:'BUNSHIN',    trait:'分身', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'分身型：発動で残像を残しつつ無敵で高速回避ダッシュ（CT25秒）' },
   chara_warp:      { id:'chara_warp',      name:'WARP',       trait:'瞬移', speed:5, jumps:3, atk:1.0, def:1.0, weight:100, desc:'瞬移型：発動で向いている方向へ一瞬でワープ（壁抜け可・CT8秒）' },
@@ -1168,6 +1168,7 @@ class Fighter {
 
     this.damage = this.startDamage();    // ％蓄積（設計書 9／hellは100%スタート）
     this.stocks = 3;                     // ストック（設計書 11）
+    this.fukkatsuUsed = false;           // FUKKATSU：この試合で復活を使ったか（一試合1回・リスポーンで維持）
     this.dead = false;
     this.invuln = 90;                    // 出現時無敵
     this.hitstun = 0;
@@ -1652,8 +1653,9 @@ class Fighter {
     }
     else if (o.type === 'fukkatsu') {
       this.boxOpen = false;
-      if (this.reviveCooldown > 0) { Sound.play('se_item_close'); return; }
-      this.reviveReady = true; this.reviveCooldown = FUKKATSU_CD;
+      // 一試合に1回だけ・ストックを失った後（stocks<3）のみ発動可
+      if (this.fukkatsuUsed || this.reviveReady || this.stocks >= 3) { Sound.play('se_item_close'); return; }
+      this.reviveReady = true; this.fukkatsuUsed = true;
       Sound.play('se_special_activate');
     }
     else if (o.type === 'iwa') {
@@ -3278,7 +3280,7 @@ class World {
     this.training = !!opts.training;
     this.over = false; this.winner = null;
     this.placements = [];                 // 脱落順（後ろが上位）
-    let i = 0; for (const f of fighters) f.reset(SPAWN[i++ % SPAWN.length]);
+    let i = 0; for (const f of fighters) { f.reset(SPAWN[i++ % SPAWN.length]); f.fukkatsuUsed = false; }   // 試合開始時に復活の使用フラグをリセット
   }
   onPlayerOut(f) {
     this.placements.push(f);
