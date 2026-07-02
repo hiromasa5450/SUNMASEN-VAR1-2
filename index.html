@@ -3874,7 +3874,9 @@ const Game = {
       ctx.fillText(c.name, x + cw/2, y + 24);
       ctx.fillStyle = '#9fb3d1'; ctx.font = '12px sans-serif';
       ctx.fillText('特性:' + c.trait, x + cw/2, y + chd - 8);
-      this.btn(x, y, cw, chd, '', () => { this.sel.charIdx = i; Sound.play('se_ui_select'); }, { bare:true });
+      // 当たり判定はスクロール窓内にクランプ（窓外にはみ出た部分が上の戻るボタン等のタップを奪わないように）
+      const vy = Math.max(y, gridWinTop), vh = Math.min(y + chd, gridWinBottom) - vy;
+      if (vh > 0) this.btn(x, vy, cw, vh, '', () => { this.sel.charIdx = i; Sound.play('se_ui_select'); }, { bare:true });
     });
     ctx.restore();
 
